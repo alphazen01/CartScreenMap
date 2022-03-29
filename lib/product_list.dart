@@ -62,7 +62,8 @@ final List<ProductsModel>products=List.generate(
                       children: [
                         IconButton(
                           onPressed: (){
-                           cartController.addProduct(products[index]); 
+                           cartController.addProduct(products[index]);
+                           
                           }, 
                           icon: Icon(Icons.add)
                         ),

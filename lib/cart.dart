@@ -1,4 +1,5 @@
 import 'package:cart/cart_controller.dart';
+import 'package:cart/data.dart';
 import 'package:cart/database_helper.dart';
 import 'package:cart/products_model.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,9 @@ import 'package:provider/provider.dart';
 class CartScreen extends StatelessWidget {
   CartScreen({Key? key}) : super(key: key);
   DatabaseHelper? databaseHelper = DatabaseHelper();
+  final List<ProductsModel>products=List.generate(
+  data.length, (index) => ProductsModel.fromMap(data[index]),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,8 @@ class CartScreen extends StatelessWidget {
                     price: cartController.cartList[index].item.price.toString(), 
                     quantity: cartController.cartList[index].quantity.toString(), 
                     cartController: cartController, 
-                    id: cartController.cartList[index].item.id 
+                    id: cartController.cartList[index].item.id,
+                    image:cartController.cartList[index].item.image
                     );
                 },
                 separatorBuilder: (context, index){
@@ -75,13 +80,17 @@ class CartItem extends StatelessWidget {
   final String quantity;
   final CartController cartController;
   final int id;
+  final String image;
+
   const CartItem({
     Key? key,
     required this.name,
     required this.price,
     required this.quantity,
     required this.cartController,
-    required this.id
+    required this.id,
+    required this.image
+ 
     
   }) : super(key: key);
 
@@ -94,8 +103,10 @@ class CartItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          Image.network(image),
           Text(name),
           Text(price),
+
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [

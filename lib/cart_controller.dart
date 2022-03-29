@@ -10,6 +10,7 @@ double total=0;
 Map<int,CartModel> cartItems={};
 List<CartModel>cartList =[];
 
+
 void addProduct(ProductsModel product){
 cartItems[product.id]=CartModel(item: product);
 cartList=cartItems.values.toList();
